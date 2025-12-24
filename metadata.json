@@ -1,0 +1,7 @@
+{
+  "name": "RedSea Mart - Driver Partner",
+  "description": "A premium, high-performance delivery driver interface for RedSea Mart real-time order scanning and local logistics management.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
