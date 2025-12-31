@@ -12,7 +12,15 @@ export const login = async (phone_number: string, password: string) => {
   });
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    const error: any = new Error(errorData.message || 'Login failed');
+
+    let errorMessage = errorData.message || 'Login failed';
+
+    // Check for nested error messages
+    if (errorData.error?.errors?.[0]) {
+      errorMessage = errorData.error.errors[0];
+    }
+
+    const error: any = new Error(errorMessage);
     error.status = response.status;
     throw error;
   }
@@ -39,11 +47,18 @@ export const searchByCoordinates = async (lat: number, lng: number, radius: numb
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    const error: any = new Error(errorData.message || 'Search failed');
+    let errorMessage = errorData.message || 'Search failed';
+
+    // Check for nested error messages
+    if (errorData.error?.errors?.[0]) {
+      errorMessage = errorData.error.errors[0];
+    }
+
+    const error: any = new Error(errorMessage);
     error.status = response.status;
     throw error;
   }
-  
+
   return response.json();
 };
 
@@ -67,7 +82,14 @@ export const updateOrderStatus = async (id: string, status: string, token: strin
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    const error: any = new Error(errorData.message || 'Failed to update order status');
+    let errorMessage = errorData.message || 'Failed to update order status';
+
+    // Check for nested error messages
+    if (errorData.error?.errors?.[0]) {
+      errorMessage = errorData.error.errors[0];
+    }
+
+    const error: any = new Error(errorMessage);
     error.status = response.status;
     throw error;
   }
