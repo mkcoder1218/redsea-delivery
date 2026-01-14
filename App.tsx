@@ -307,7 +307,7 @@ const App: React.FC = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
                       <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Items</p>
-                      <p className="text-xl font-black">{selectedOrder.order_items?.length || 0}</p>
+                      <p className="text-xl font-black">{selectedOrder.items?.length || 0}</p>
                     </div>
                     <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
                       <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Payout</p>
@@ -323,10 +323,10 @@ const App: React.FC = () => {
                       )}
                     </div>
                     <div className="divide-y divide-white/5">
-                      {(selectedOrder.order_items || []).map((item) => (
+                      {(selectedOrder.items || []).map((item) => (
                         <div key={item.id} className="p-4 flex justify-between items-center">
                           <div className="min-w-0">
-                            <p className="text-[11px] font-black truncate">{item.product.name}</p>
+                            <p className="text-[11px] font-black truncate">{item.product?.name || 'Unknown Product'}</p>
                             <p className="text-[9px] font-bold text-slate-500">QTY: {item.quantity}</p>
                           </div>
                           <p className="text-[10px] font-black text-slate-300">{item.price} ETB</p>
